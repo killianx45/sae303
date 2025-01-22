@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html data-theme="nord" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprendre l'autisme - Aux travers des données</title>
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.22/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="Comprendre l'autisme - Aux travers des données"
+    />
+    <link rel="shortcut icon" type="image/png" href="assets/img/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+  <body>
+    <header id="home" class="h-screen">
+      <nav
+        class="bg-blue-100 border border-gray-700 rounded-full max-w-4xl mx-auto mt-8 text-black fixed top-0 left-1/2 transform -translate-x-1/2 w-11/12 z-50"
+        id="navbar"
+      >
+        <div
+          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2"
+        >
+          <a
+            href="#home"
+            class="flex items-center space-x-3 rtl:space-x-reverse"
+          >
+            <img
+              src="assets/img/logo.png"
+              class="h-8"
+              alt="Logo de Killian Jeuffroy"
+              loading="eager"
+            />
+            <span
+              class="self-center text-xl lg:text-2xl font-semibold whitespace-nowrap text-black"
+              >Faire un don</span
+            >
+          </a>
+          <div
+            class="flex lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse"
+          >
+            <button
+              data-collapse-toggle="navbar-cta"
+              type="button"
+              class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-black rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-black dark:hover:bg-gray-700"
+              aria-controls="navbar-cta"
+              aria-expanded="false"
+              onclick="toggleNavbar()"
+            >
+              <span class="sr-only">Ouvrir le menu</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
+            id="navbar-cta"
+          >
+            <ul
+              class="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-700 rounded-lg bg-blue-100 lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-blue-100 text-black lg:justify-end"
+            >
+              <li>
+                <a
+                  href="index.html"
+                  class="block py-2 px-3 lg:p-0 text-black rounded lg:bg-transparent lg:text-black hover:text-blue-400"
+                  aria-current="page"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="resultats.html"
+                  class="block py-2 px-3 lg:p-0 text-black rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-400 lg:dark:hover:text-blue-400 dark:text-black dark:hover:bg-gray-700 dark:hover:text-blue-400 lg:dark:hover:bg-transparent dark:border-gray-700"
+                  >Résultats</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#decouvrir"
+                  class="block py-2 px-3 lg:p-0 text-black rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-400 lg:dark:hover:text-blue-400 dark:text-black dark:hover:bg-gray-700 dark:hover:text-blue-400 lg:dark:hover:bg-transparent dark:border-gray-700"
+                  >Découvrir</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#contact"
+                  class="block py-2 px-3 lg:p-0 text-black rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-400 lg:dark:hover:text-blue-400 dark:text-black dark:hover:bg-gray-700 dark:hover:text-blue-400 lg:dark:hover:bg-transparent dark:border-gray-700"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="flex flex-col items-center justify-center h-screen bg-blue-200 rounded-b-xl"
+      >
+        <h1
+          class="text-3xl text-black text-center mt-12 p-8 md:text-4xl lg:text-6xl lg:w-[60%] lg:mt-0"
+        >
+        Découvrez ce que vos <em class="text-blue-400">données révèlent</em> ✦ Explorez les résultats et comprenez chaque <em class="text-blue-400">détail analysé</em> avec précision.
+        </h1>
+        <p class="text-black text-center text-xs mt-4 px-4 w-[70%]">
+          Vous n'êtes pas seul dans ce combat. Ensemble, nous pouvons faire une
+          différence.
+        </p>
+        <div class="flex flex-col items-center justify-center mt-8">
+          <a
+            href="#"
+            class="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2 svg-icon"
+          >
+            Faire un don
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <main class="px-4 md:px-6 lg:px-8 bg-blue-100 rounded-t-xl mt-5 rounded-b-xl">
+      <h1 class="text-2xl md:text-4xl font-bold text-justify pt-6">
+        Vulgarisation scientifiques
+      </h1>
+      <section>
+        <div class="flex flex-col lg:flex-row lg:gap-8">
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-xl font-bold mt-5">Paramètres :</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2 mt-5 md:gap-4">
+              <button
+                class="rounded-md flex flex-row bg-blue-400 w-full md:h-[100px]"
+              >
+                <div class="flex flex-col p-2">
+                  <p>TTT</p>
+                  <img
+                    src="assets/picto/PNG/TTT_ecran.png"
+                    class="w-[25px] mt-2"
+                    alt="picto TTT"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-center p-2">
+                  <p class="text-sm">Temps total enregistrement</p>
+                </div>
+              </button>
+              <button class="rounded-md flex flex-row bg-blue-400 w-full">
+                <div class="flex flex-col p-2">
+                  <p>TP</p>
+                  <img
+                    src="assets/picto/PNG/TP_ecran.png"
+                    class="w-[25px] mt-2"
+                    alt="picto TP"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-center p-2">
+                  <p class="text-sm">Temps passé cumulé dans une Zone</p>
+                </div>
+              </button>
+              <button class="rounded-md flex flex-row bg-blue-400 w-full">
+                <div class="flex flex-col p-2">
+                  <p>TF</p>
+                  <img
+                    src="assets/picto/PNG/TF_ecran.png"
+                    class="w-[25px] mt-2"
+                    alt="picto TF"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-center p-2">
+                  <p class="text-sm">
+                    Temps cumulé pendant lequel le cerveau fait la reconnaissance
+                    des objets
+                  </p>
+                </div>
+              </button>
+              <button class="rounded-md flex flex-row bg-blue-400 w-full md:h-[100px]">
+                <div class="flex flex-col p-2">
+                  <p>NBF</p>
+                  <img
+                    src="assets/picto/PNG/NBF_ecran.png"
+                    class="w-[25px] mt-2"
+                    alt="picto NBF"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-center p-2">
+                  <p class="text-sm">Nombre de fixation dans une Zone du sujet</p>
+                </div>
+              </button>
+              <button class="rounded-md flex flex-row bg-blue-400 w-full">
+                <div class="flex flex-col p-2">
+                  <p>NBEZ</p>
+                  <img
+                    src="assets/picto/PNG/NBEZ_ecran.png"
+                    class="w-[25px] mt-2"
+                    alt="picto NBEZ"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-center p-2">
+                  <p class="text-sm">Nombre de visite d'une zone</p>
+                </div>
+              </button>
+              <button class="rounded-md flex flex-row bg-blue-400 w-full">
+                <div class="flex flex-col p-2">
+                  <p>LT</p>
+                  <img
+                    src="assets/picto/PNG/LT_ecran.png"
+                    class="w-[25px] mt-2"
+                    alt="picto LT"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-center p-2">
+                  <p class="text-sm">
+                    Temps passé avant la première visite d'une zone
+                  </p>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-xl font-bold mt-5">Populations :</h2>
+            <div class="flex flex-col md:flex-row lg:flex-col md:justify-evenly md:items-center gap-2 mt-5 md:gap-4">
+              <button class="rounded-md flex flex-row bg-blue-400 w-full md:w-[40%] lg:w-full md:h-[100px]">
+                <div class="flex flex-col items-center justify-center p-2">
+                  <p>DT</p>
+                </div>
+                <div class="flex flex-col justify-center items-center p-2">
+                  <p class="text-sm">
+                    Enfants ne présentant pas de signes d'autisme
+                  </p>
+                </div>
+              </button>
+              <button class="rounded-md flex flex-row bg-blue-400 w-full md:w-[40%] lg:w-full md:h-[100px]">
+                <div class="flex flex-col items-center justify-center p-2">
+                  <p>TSA</p>
+                </div>
+                <div class="flex flex-col justify-center items-center p-2">
+                  <p class="text-sm">
+                    Enfants présentant un trouble du spectre de l'autisme
+                  </p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="border border-black border-2 rounded-md mt-5 p-2">
+        <h2 class="text-2xl font-bold ml-5 underline">Points Essentiels</h2>
+        <div class="flex flex-col md:justify-center md:items-center gap-2">
+          <p class="text-center text-sm mt-2 md:text-base md:w-[80%]">
+            Les données issues de cette étude sont d’une importance capitale pour
+          favoriser le dépistage précoce de l’autisme. Une identification rapide
+          des signes permet de mettre en place des interventions personnalisées,
+          offrant aux enfants autistes des outils adaptés pour maximiser leur
+            développement et leur bien-être.
+          </p>
+          <p class="text-center text-sm mt-2 md:text-base md:w-[80%]">
+            De plus, ces informations enrichissent notre compréhension des
+            spécificités liées à l’autisme, contribuant ainsi à l’élaboration de
+            programmes d’intervention et de politiques de santé mieux adaptés. En
+          encourageant un dépistage dès les premiers signes d’inquiétude, nous
+          créons des opportunités pour améliorer significativement la qualité de
+          vie des enfants concernés et de leurs familles.
+          </p>
+        </div>
+        <h3 class="text-xl font-bold mt-5 ml-5 underline">Statistiques :</h3>
+        <div class="flex flex-col md:flex-row md:justify-center md:items-center gap-2">
+        <div class="grid grid-cols-2 gap-2">
+          <div class="border-l-2 border-black p-2">
+            <p>0.70%</p>
+            <p>Autisme dans le monde</p>
+          </div>
+          <div class="border-l-2 border-black p-2">
+            <p>100 000</p>
+            <p>Au moins de 20 ans</p>
+          </div>
+          <div class="border-l-2 border-black p-2">
+            <p>700 000</p>
+            <p>Autiste en France</p>
+          </div>
+          <div class="border-l-2 border-black p-2">
+            <p>8000</p>
+            <p>Naissances chaques années</p>
+          </div>
+        </div>
+      </div>
+      </section>
+    </main>
+    
+    <footer
+    id="contact"
+    class="w-full mx-auto bg-blue-200 mt-5 rounded-t-xl min-h-screen py-12 md:py-0 flex items-center justify-center"
+  >
+    <div class="flex flex-col items-center justify-center w-full">
+      <h2 class="text-sm md:text-xl font-bold text-center mt-8">
+        Contacter l'équipe
+      </h2>
+      <h3
+        class="text-3xl text-black text-center p-8 md:text-4xl lg:text-6xl lg:w-[70%]"
+      >
+        Une question ? Une idée ? ✦ Contactez-nous et participez à une cause
+        qui change des vies. Ensemble, faisons avancer la recherche sur
+        l'autisme.
+      </h3>
+      <p class="text-black text-center text-xs mt-4 px-4 w-[70%]">
+        Vous n'êtes pas seul dans ce combat. Ensemble, nous pouvons faire une
+        différence.
+      </p>
+      <div class="flex flex-col items-center justify-center mt-8">
+        <a
+          href="#"
+          class="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2 svg-icon"
+        >
+          Faire un don
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+      </div>
+      <div class="flex flex-col items-center justify-center w-full mt-5 p-4">
+        <div>
+          <p class="text-sm text-center">
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            - Comprendre l'autisme - Aux travers des données
+          </p>
+        </div>
+        <ul class="flex flex-wrap items-center justify-center mt-5 md:mt-0">
+          <li
+            class="inline-block relative pe-4 text-xs last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-1.5 before:-translate-y-1/2 before:size-[3px] before:rounded-full before:bg-gray-400 dark:text-neutral-500 dark:before:bg-neutral-600"
+          >
+            <a
+              class="text-xs text-gray-900 underline hover:text-gray-800 hover:decoration-2 focus:outline-none focus:decoration-2"
+              href="#donnees"
+              >Données</a
+            >
+          </li>
+          <li
+            class="inline-block relative pe-4 text-xs last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-1.5 before:-translate-y-1/2 before:size-[3px] before:rounded-full before:bg-gray-400 dark:text-neutral-500 dark:before:bg-neutral-600"
+          >
+            <a
+              class="text-xs text-gray-900 underline hover:text-gray-800 hover:decoration-2 focus:outline-none focus:decoration-2"
+              href="resultats.html"
+              >Résultats</a
+            >
+          </li>
+          <li class="inline-block pe-4 text-xs">
+            <a
+              class="text-xs text-gray-900 underline hover:text-gray-800 hover:decoration-2 focus:outline-none focus:decoration-2"
+              href="#contact"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <script
+    src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"
+    defer
+  ></script>
+  <script src="assets/js/script.js"></script>
+  </body>
+</html>
