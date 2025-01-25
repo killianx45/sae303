@@ -21,21 +21,20 @@ function toggleNavbar() {
 const scrollItems = document.querySelectorAll(".scroll-item");
 
 const observerOptions = {
-  root: null, // Utilise le viewport
+  root: null,
   rootMargin: "0px",
-  threshold: 0.1, // 10% de l'élément visible
+  threshold: 0.1,
 };
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target); // Arrête d'observer une fois visible
+      observer.unobserve(entry.target);
     }
   });
 }, observerOptions);
 
-// Observer chaque élément
 scrollItems.forEach((item) => {
   observer.observe(item);
 });

@@ -11,3 +11,23 @@
 em {
   font-style: normal;
 }
+
+canvas {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+table td {
+  border: 1px solid black;
+}
+
+#visage {
+  width: 80%;
+  aspect-ratio: 3/4;
+  border: 1px solid rgb(170, 170, 170);
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
