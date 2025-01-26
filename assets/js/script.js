@@ -18,23 +18,26 @@ function toggleNavbar() {
   navbar.classList.toggle("rounded-full");
 }
 
-const scrollItems = document.querySelectorAll(".scroll-item");
+document.addEventListener("DOMContentLoaded", function () {
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
 
-const observerOptions = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 0.1,
-};
+  const fadeInElements = document.querySelectorAll(".scroll-item");
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    }
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  fadeInElements.forEach((element) => {
+    observer.observe(element);
   });
-}, observerOptions);
-
-scrollItems.forEach((item) => {
-  observer.observe(item);
 });
