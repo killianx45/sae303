@@ -12,9 +12,15 @@ var indiceAge;
 var output = document.getElementById("result");
 var divVisageSelect = document.getElementById("divVisageSelect");
 let myChartParam; // Declare the chart variable globally for canvasParam
-
-// Variables globales pour les graphiques
 let chartPValues, chartEcarts;
+var allVariables = [
+  { value: "TTT" },
+  { value: "TF" },
+  { value: "TP" },
+  { value: "NBF" },
+  { value: "NBEZ" },
+  { value: "Lat" },
+];
 
 function previewXLSFile(e) {
   var file = e.target.files[0];
@@ -323,19 +329,103 @@ function afficheDataVis() {
   const variable = document.getElementById("variableSelect").value;
   const visageSelect = document.getElementById("visageSelect").value;
   const ageCategory = parseInt(document.getElementById("ageCategory").value);
-  const allVariables = Array.from(
-    document.getElementById("variableSelect").options
-  );
   const variableName =
     variable === "TTT"
       ? `${variable}_${visageSelect}`
       : `${variable}_${zone}_${visageSelect}`;
   const indVarSel = listVariables.indexOf(variableName);
 
-  if (indVarSel === -1) {
-    console.error(`Variable ${variableName} non trouvée dans les données`);
-    return;
+  const tabDTVarSel = recuperationValeursVariable(tabDT, indVarSel);
+  const tabTSAVarSel = recuperationValeursVariable(tabTSA, indVarSel);
+  const deuxVarTabDT = recuperationValeursDeuxVariables(
+    tabDT,
+    indiceAge,
+    indVarSel
+  );
+  const deuxVarTabTSA = recuperationValeursDeuxVariables(
+    tabTSA,
+    indiceAge,
+    indVarSel
+  );
+
+  const processData = (ages, values) => {
+    const dataMap = new Map();
+    ages.forEach((age, index) => {
+      const roundedAge = Math.round(age * 2) / 2;
+      if (!dataMap.has(roundedAge)) {
+        dataMap.set(roundedAge, []);
+      }
+      dataMap.get(roundedAge).push(values[index]);
+    });
+
+    const processedData = Array.from(dataMap.entries()).map(([age, vals]) => ({
+      x: age,
+      y: vals.reduce((a, b) => a + b, 0) / vals.length,
+    }));
+
+    return processedData.sort((a, b) => a.x - b.x);
+  };
+
+  const dtData = processData(deuxVarTabDT[0], deuxVarTabDT[1]);
+  const tsaData = processData(deuxVarTabTSA[0], deuxVarTabTSA[1]);
+  const ctxAge = document.getElementById("canvasDT").getContext("2d");
+  if (myChartDT) {
+    myChartDT.destroy();
   }
+
+  myChartDT = new Chart(ctxAge, {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          label: "DT",
+          backgroundColor: "rgba(255,0,0,0.1)",
+          borderColor: "rgba(255,0,0,1.0)",
+          data: dtData,
+          pointRadius: 3,
+          tension: 0.4,
+        },
+        {
+          label: "TSA",
+          backgroundColor: "rgba(0,0,255,0.1)",
+          borderColor: "rgba(0,0,255,1.0)",
+          data: tsaData,
+          pointRadius: 3,
+          tension: 0.4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: `Évolution de ${variableName} par âge`,
+        },
+        legend: {
+          position: "top",
+        },
+      },
+      scales: {
+        x: {
+          type: "linear",
+          title: {
+            display: true,
+            text: "Âge (ans)",
+          },
+          ticks: {
+            stepSize: 0.5,
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: variableName,
+          },
+        },
+      },
+    },
+  });
 
   const catAgeData = {
     tabDTCatAge1: tabDT.filter((ligne) =>
@@ -360,9 +450,6 @@ function afficheDataVis() {
     variable === "TTT"
       ? "./assets/picto/SVG/" + variable + ".svg"
       : "./assets/picto/SVG/" + variable + zone + ".svg";
-
-  var tabDTVarSel = recuperationValeursVariable(tabDT, indVarSel);
-  var tabTSAVarSel = recuperationValeursVariable(tabTSA, indVarSel);
 
   const boxplotData = {
     labels: ["DT", "TSA", "DT Cat1", "DT Cat2", "TSA Cat1", "TSA Cat2"],
